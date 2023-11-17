@@ -39,9 +39,10 @@ urls.reset_index(inplace=True, drop=True)
 
 def extract_data_from_html(soup):
     
-    
+    print('Extracting data from html', link)
     nome = soup.find('meta', property='og:title')['content']
-    codigo = soup.find('meta', attrs={'name': 'twitter:data1'})['content']
+    try:
+        codigo = soup.find('meta', attrs={'name': 'twitter:data1'})['content']
     try:
         preco = soup.find('strong', attrs = 'preco-promocional cor-principal titulo')['data-sell-price']
     except TypeError:
