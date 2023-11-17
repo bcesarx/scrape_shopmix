@@ -12,6 +12,7 @@ import time
 from datetime import datetime
 from tqdm import tqdm
 from src import dw_utils as dw
+import platform
 
 # %%
 ### atualzar lista de links no sitemap
@@ -55,8 +56,8 @@ def extract_data_from_html(soup):
         estoque = soup.find('b', class_='qtde_estoque').text
     except AttributeError:
         estoque = 'Não disponível'
-    imagens = [img['src'] for img in soup.find_all('img') if 'produto' in img['src']]
-    
+    imagens = [img['src'] for img in soup.find_all('img') if img.get('src') != None]
+    imagens = [imagem for imagem in imagens if 'produto' in imagem]    
     return {
         'nome': nome,
         'código': codigo,
@@ -99,7 +100,7 @@ for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit
     if counter  == 201:
         time.sleep(57)
         counter = 0
-        
+    break
 
 # salvar dataframe consolidado em csv
 
@@ -111,21 +112,42 @@ for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit
 
 # %%
 
-p_host = 'localhost'
-p_port = 5432
-db = 'postgres'
-ssh = True
-ssh_user = 'ubuntu'
-ssh_host = '144.22.150.9'
-psql_user = 'postgres'
+if platform.system() == 'Windows':
+    p_host = 'localhost'
+    p_port = 5432
+    db = 'postgres'
+    ssh = True
+    ssh_user = 'ubuntu'
+    ssh_host = '144.22.150.9'
+    psql_user = 'postgres'
 
 
-psql_pass = 'alice11'
-ssh_pkey = r"C:\Users\bcesa\OneDrive\Documentos\Infra na Núvem\mydata\ssh-key-2022-10-28.key"
+    psql_pass = 'alice11'
+    ssh_pkey = r"C:\Users\bcesa\OneDrive\Documentos\Infra na Núvem\mydata\ssh-key-2022-10-28.key"
 
-pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
-                              , psql_pass=psql_pass)
-#initiates a connection to the PostgreSQL database. In this instance we use ssh and must specify our ssh credentials.
+    pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
+                                , psql_pass=psql_pass)
+    #initiates a connection to the PostgreSQL database. In this instance we use ssh and must specify our ssh credentials.
+
+    #You'll need to define psql_user and psql_pass using input() and getpass() to temporarily store your credentials.
+    #Alternatively, best practice you may be to store your credentials as environment variables.
+    # psql_user = input("Please enter your database username:")
+
+
+elif platform.system() == 'Linux':
+    p_host = 'localhost'
+    p_port = 5432
+    db = 'postgres'
+    ssh = False
+    ssh_user = 'ubuntu'
+    ssh_host = 'localhost'
+    psql_user = 'postgres'
+    
+    psql_pass = 'alice11'
+    ssh_pkey = r"/home/ubuntu/ssh-key-2022-10-28.key"
+    
+    pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
+                                , psql_pass=psql_pass)#initiates a connection to the PostgreSQL database. In this instance we use ssh and must specify our ssh credentials.
 
 #You'll need to define psql_user and psql_pass using input() and getpass() to temporarily store your credentials.
 #Alternatively, best practice you may be to store your credentials as environment variables.
