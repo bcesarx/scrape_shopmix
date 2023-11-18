@@ -105,9 +105,10 @@ for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit
     ##colocar uma pausa de 1 segundo a cada 50 produtos
     counter += 1
     time.sleep(5)
-    if counter  == 201:
-        time.sleep(57)
-        counter = 0
+    if counter  == 5:
+        break
+        #time.sleep(57)
+        #counter = 0
     
 
 # salvar dataframe consolidado em csv
