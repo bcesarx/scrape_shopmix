@@ -1,5 +1,6 @@
 # %%
 # Importar bibiotecas
+print("Importando bibliotecas...")
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup as bs
@@ -17,7 +18,7 @@ pd.set_option('display.max_colwidth', None)
 import platform
 
 # %%
-platform.system()
+print(platform.system())
 
 # %%
 ### atualzar lista de links no sitemap
