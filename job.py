@@ -83,6 +83,7 @@ def extract_data_from_html(soup,url):
 
 df_produtos_consolidado = pd.DataFrame()
 counter = 0
+print("iniciando_loop")
 for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit='produto'):
 
     ## baixar pagina do produto
