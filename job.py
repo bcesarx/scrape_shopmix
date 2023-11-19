@@ -9,6 +9,9 @@ import time
 from datetime import datetime
 from tqdm import tqdm
 from src import dw_utils as dw
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_colwidth', None)
 
 # %%
 import platform
@@ -38,14 +41,13 @@ urls = urls.loc[urls["links_catalogo"] != BASE_URL]
 urls.reset_index(inplace=True, drop=True)
 
 # %%
-urls
 
-# %%
-
-def extract_data_from_html(soup):
+def extract_data_from_html(soup,url):
     
     
+
     nome = soup.find('meta', property='og:title')['content']
+
     codigo = soup.find('meta', attrs={'name': 'twitter:data1'})['content']
     try:
         preco = soup.find('strong', attrs = 'preco-promocional cor-principal titulo')['data-sell-price']
@@ -89,7 +91,11 @@ for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit
     ### converter página em soup
     prod_content_soup = bs(prod_content, 'html.parser')
     ### extrair dicionário com os dados chave do produto ## converter dicionário em dataframe
-    dict_produto = extract_data_from_html(prod_content_soup)
+    try:
+        dict_produto = extract_data_from_html(prod_content_soup,link)
+    except exception as e:
+        print(e, "___>" ,'Erro ao obter dados do produto: --->',link)
+        continue
     ## converter a lita de imagens em str
     dict_produto["imagens"] = str(dict_produto["imagens"])
 
@@ -105,9 +111,9 @@ for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit
     ##colocar uma pausa de 1 segundo a cada 50 produtos
     counter += 1
     time.sleep(5)
-    if counter  == 250:
-
-        time.sleep(27)
+    if counter  == 30:
+        time.sleep(57)
+        # break
         counter = 0
     
 
