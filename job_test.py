@@ -161,9 +161,9 @@ if platform.system() == 'Windows':
 elif platform.system() == 'Linux':
     print("Linux")
     ### checa se o arquivo da chave existe no diretório
-    if os.path.isfile('/home/ubuntu/keys/ssh/ssh-key-2022-10-28.key'):
+    if os.path.isfile('/ssh-key-2022-10-28.key'):
         print("Arquivo da chave existe")
-    el
+    
     p_host = 'localhost'
     p_port = 5432
     db = 'postgres'
@@ -173,7 +173,7 @@ elif platform.system() == 'Linux':
     psql_user = 'postgres'
     
     psql_pass = 'alice11'
-    ssh_pkey = r"./ssh-key-2022-10-28.key"
+    ssh_pkey = r'/ssh-key-2022-10-28.key'
     
     pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
                                 , psql_pass=psql_pass)
