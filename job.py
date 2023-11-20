@@ -100,7 +100,7 @@ for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit
     ### extrair dicionário com os dados chave do produto ## converter dicionário em dataframe
     try:
         dict_produto = extract_data_from_html(prod_content_soup,link)
-    except exception as e:
+    except Exception as e:
         print(e, "___>" ,'Erro ao obter dados do produto: --->',link)
         continue
     ## converter a lita de imagens em str
