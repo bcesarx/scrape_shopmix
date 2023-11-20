@@ -84,7 +84,7 @@ def extract_data_from_html(soup,url):
 
 ### filtrar os primeiros 5 registros do dataframe url
 
-urls = urls.head(5)
+urls = urls.head(2)
 
 
 df_produtos_consolidado = pd.DataFrame()
@@ -160,8 +160,8 @@ if platform.system() == 'Windows':
 
 elif platform.system() == 'Linux':
     print("Linux")
-    ### checa se o arquivo da chave existe no diretório
-    if os.path.isfile('/ssh-key-2022-10-28.key'):
+    ### checa se o arquivo da chave existe no diretório atual
+    if os.path.isfile('ssh-key-2022-10-28.key'):
         print("Arquivo da chave existe")
     
     p_host = 'localhost'
@@ -173,7 +173,7 @@ elif platform.system() == 'Linux':
     psql_user = 'postgres'
     
     psql_pass = 'alice11'
-    ssh_pkey = r'/ssh-key-2022-10-28.key'
+    ssh_pkey = 'ssh-key-2022-10-28.key'
     
     pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
                                 , psql_pass=psql_pass)
