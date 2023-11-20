@@ -161,13 +161,13 @@ elif platform.system() == 'Linux':
     p_host = 'localhost'
     p_port = 5432
     db = 'postgres'
-    ssh = False
+    ssh = True
     ssh_user = 'ubuntu'
-    ssh_host = 'localhost'
+    ssh_host = '144.22.150.9'
     psql_user = 'postgres'
     
     psql_pass = 'alice11'
-    ssh_pkey = r"/home/ubuntu/ssh-key-2022-10-28.key"
+    ssh_pkey = r"/home/ubuntu/keys/ssh/ssh-key-2022-10-28.key"
     
     pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
                                 , psql_pass=psql_pass)
