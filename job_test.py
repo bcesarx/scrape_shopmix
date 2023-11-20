@@ -13,6 +13,7 @@ from src import dw_utils as dw
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_colwidth', None)
+import os
 
 # %%
 import platform
@@ -158,6 +159,11 @@ if platform.system() == 'Windows':
 
 
 elif platform.system() == 'Linux':
+    print("Linux")
+    ### checa se o arquivo da chave existe no diretório
+    if os.path.isfile('/home/ubuntu/keys/ssh/ssh-key-2022-10-28.key'):
+        print("Arquivo da chave existe")
+    
     p_host = 'localhost'
     p_port = 5432
     db = 'postgres'
