@@ -13,6 +13,7 @@ from src import dw_utils as dw
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_colwidth', None)
+import os
 
 # %%
 import platform
@@ -80,6 +81,10 @@ def extract_data_from_html(soup,url):
 
 # %%
 # obter soup de cada url de cada produto
+
+### filtrar os primeiros 5 registros do dataframe url
+
+#urls = urls.head(2)
 
 
 df_produtos_consolidado = pd.DataFrame()
@@ -154,16 +159,21 @@ if platform.system() == 'Windows':
 
 
 elif platform.system() == 'Linux':
+    print("Linux")
+    ### checa se o arquivo da chave existe no diretório atual
+    if os.path.isfile('ssh-key-2022-10-28.key'):
+        print("Arquivo da chave existe")
+    
     p_host = 'localhost'
     p_port = 5432
     db = 'postgres'
-    ssh = False
+    ssh = True
     ssh_user = 'ubuntu'
-    ssh_host = 'localhost'
+    ssh_host = '144.22.150.9'
     psql_user = 'postgres'
     
     psql_pass = 'alice11'
-    ssh_pkey = r"/home/ubuntu/ssh-key-2022-10-28.key"
+    ssh_pkey = 'ssh-key-2022-10-28.key'
     
     pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
                                 , psql_pass=psql_pass)
