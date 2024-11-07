@@ -137,17 +137,17 @@ for link in tqdm(urls["links_catalogo"], desc='Obtendo dados dos produtos', unit
 
 
 if platform.system() == 'Windows':
-    p_host = 'localhost'
+    p_host = 'XXXX'
     p_port = 5432
-    db = 'postgres'
+    db = 'XXXX'
     ssh = True
-    ssh_user = 'ubuntu'
-    ssh_host = '144.22.150.9'
-    psql_user = 'postgres'
+    ssh_user = 'XXXXX'
+    ssh_host = 'XXXXX'
+    psql_user = 'XXX'
 
 
-    psql_pass = 'alice11'
-    ssh_pkey = r"C:\Users\bcesa\OneDrive\Documentos\Infra na Núvem\mydata\ssh-key-2022-10-28.key"
+    psql_pass = 'XXXXXX'
+    ssh_pkey = r"XXXX"
 
     pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
                                 , psql_pass=psql_pass)
@@ -164,16 +164,16 @@ elif platform.system() == 'Linux':
     if os.path.isfile('ssh-key-2022-10-28.key'):
         print("Arquivo da chave existe")
     
-    p_host = 'localhost'
+    p_host = 'XXX'
     p_port = 5432
-    db = 'postgres'
+    db = 'XXXXX'
     ssh = True
-    ssh_user = 'ubuntu'
-    ssh_host = '144.22.150.9'
-    psql_user = 'postgres'
+    ssh_user = 'XXXX'
+    ssh_host = 'XXX'
+    psql_user = 'XXX'
     
-    psql_pass = 'alice11'
-    ssh_pkey = 'ssh-key-2022-10-28.key'
+    psql_pass = 'XXXX'
+    ssh_pkey = 'XXXXXX'
     
     pgres = dw.Postgresql_connect(pgres_host=p_host, pgres_port=p_port, db=db, ssh=ssh, ssh_user=ssh_user, ssh_host=ssh_host, ssh_pkey=ssh_pkey, psql_user=psql_user
                                 , psql_pass=psql_pass)
