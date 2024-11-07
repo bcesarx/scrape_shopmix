@@ -161,7 +161,7 @@ if platform.system() == 'Windows':
 elif platform.system() == 'Linux':
     print("Linux")
     ### checa se o arquivo da chave existe no diretório atual
-    if os.path.isfile('ssh-key-2022-10-28.key'):
+    if os.path.isfile('XXXXXXXX'):
         print("Arquivo da chave existe")
     
     p_host = 'XxXX'
